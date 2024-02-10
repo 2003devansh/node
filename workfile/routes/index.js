@@ -1,14 +1,18 @@
 var express = require('express');
 var router = express.Router();
 const userModel = require("./users");
+const session = require('express-session');
 
 /* GET home page. */
 router.get("/",function(req,res){
+  res.cookie("age",25);
   res.render("index")
 })
 
-//db ke collection asynchronus hote hai toh uskio phele run karwaneke liye/
-// hum async await ka use karte hai
+router.get("/read",function(req,res){
+  console.log(req.cookies);
+  res.send("check")
+})
 
 router.get("/create",async function(req,res){
 const createuser =  await userModel.create({
@@ -16,26 +20,18 @@ const createuser =  await userModel.create({
   age: 25,
   name:"faujdar"
  });
-
-
  res.send(createuser)
 
 })
-
-
-
 
 router.get("/alluser",async function(req,res){
   let alluser = await userModel.find();
   res.send(alluser)
  })
-
- 
 router.get("/finduser",async function(req,res){
   let find1 = await userModel.findOne({username: "devansh"});
   res.send(find1)
  })
-
  router.get("/delete", async function(req,res){
    let deleteuser = await userModel.findOneAndDelete({
   username : "devansh"
@@ -44,5 +40,26 @@ router.get("/finduser",async function(req,res){
 
  })
  
+router.get("/",function(req,res){
+  req.session.ban = "hello" ;
+  res.render("index");
+})
+
+router.get("/checkban",function(req,res){
+  if(req.session.ban === true){
+    res.send("you are banned")
+
+  }
+})
+
+router.get("/removeban", function(req,res){
+  req.sessionStore.destroy(function(err){
+    if (err) throw err;
+    res.send("ban removed")
+
+  })
+})
+
+
 
 module.exports = router;
