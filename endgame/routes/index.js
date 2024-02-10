@@ -16,14 +16,17 @@ router.get('/', function(req, res) {
  // one route to the other route
 
  router.get('/failed',function(req,res){
-  req.flash("age",12)
+  req.flash("age",12);
+  req.flash("name","devansh");
   res.send("ban gya")
   // jaise hi koi /failed route pe ayega to ek data banega age naam se jiski value hogi 12
  })
 
  router.get('/checkkaro',function(req,res){
   console.log(req.flash("age"));
+  console.log(req.flash("name"));
   // acquiring data throgh flash
+  res.send("check karlo backend ke teminal pe")
  })
 
 module.exports = router;
