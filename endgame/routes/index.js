@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+const userModel = require("./users")
+
 /* GET home page. */
 router.get('/', function(req, res) {
   res.render('index');
@@ -28,5 +30,17 @@ router.get('/', function(req, res) {
   // acquiring data throgh flash
   res.send("check karlo backend ke teminal pe")
  })
+
+ router.get("/create",async function(req,res){
+ let userdata =  await userModel.create({
+    username : "harsh",
+    nickname: "asyncjavascript",
+    description: " i  am the guy who likes to do the coding",
+    categories : ['java','node','gsap','moder animation'],
+  })
+ })
+
+ // question 1
+
 
 module.exports = router;

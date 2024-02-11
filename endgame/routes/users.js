@@ -3,9 +3,10 @@ const mongoose = require("mongoose");
 mongoose.connect("mongodb://127.0.0.1:27017/testingendgame");
 // it will create a databse name as testingendgame
 
-mongoose.Schema({
+const userSchema =   mongoose.Schema({
   username : String,
-  password : String,
+  nickname : String,
+ description: String,
   categories : {
     type : Array,
     default: [] // this is created because of the question 2
@@ -18,6 +19,8 @@ mongoose.Schema({
   }
   
 })
+
+mongoose.model("user",userSchema);
 
 // question 1 :->
 // how can i perform a case-insensitive search in mongose? 
