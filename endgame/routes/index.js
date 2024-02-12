@@ -49,7 +49,16 @@ router.get("/particularcate" , async function(req,res){
   res.send(user);
 })
 
-// 
+// answer of the question 3
+router.get("/findate", async function(req,res){
+  var date1 = new Date('2024-02-11');
+  var date2 = new Date('2024-02-11');
+
+  let user = await userModel.find({datecreated : {$gte : date1,$lte: date2}});
+  res.send(user);
+  // gte = greator then equal to
+  // lte = less then equal to 
+})
 
 
 
