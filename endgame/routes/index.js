@@ -19,6 +19,16 @@ router.get("/checkaro",function(req,res){
   res.send("check karlo backend ke terminal pe");
 })
 
+router.get("/create",async function(req,res){
+  let userdata = await userModel.create({
+    username: "rashi",
+    nickname: "rashoi mishra",
+    description : "hello everyone ",
+    categories : ['js','node','react']
+  });
+  res.send(userdata)
+})
+
 module.exports = router;
 
 
@@ -28,3 +38,6 @@ module.exports = router;
 // agar login ho jaye to login ke baad profile page dikhado
 // agr naa ho to fir , kisi aur route prr direct kardo
 // jaise ki /error par vha par dikhao failed
+
+// question 1:->
+// how can i perform a case insensitive in mongoose
