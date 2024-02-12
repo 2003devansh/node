@@ -29,6 +29,32 @@ router.get("/create",async function(req,res){
   res.send(userdata)
 })
 
+// answer of th equestion 1
+router.get("/find",async function(req,res){
+  var RegEx= new RegExp("^DevanSh$","i");
+  // regexp names ko insensitive bna deta hai
+  let user = await userModel.find({username: RegEx })
+  res.send(user)
+})
+
+
+router.get("/alluser", async function(req,res){
+  let alluserdata = await userModel.find();
+  res.send(alluserdata);
+})
+
+// answer of question 2
+router.get("/particularcate" , async function(req,res){
+  let user = await userModel.find({categories: { $all: ['gsap']}});
+  res.send(user);
+})
+
+// 
+
+
+
+
+
 module.exports = router;
 
 
@@ -41,3 +67,12 @@ module.exports = router;
 
 // question 1:->
 // how can i perform a case insensitive in mongoose
+
+
+// question 2:->
+// how do i find the document where an array field contains all 
+// of a set of value?
+
+// question 3:-> 
+// how can i search for the document with a specific date range in mongoose?
+
